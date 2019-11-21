@@ -1,1 +1,1 @@
-web: gunicorn app:pid_flask
+web: gunicorn app.app
