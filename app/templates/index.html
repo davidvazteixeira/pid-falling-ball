@@ -1,0 +1,94 @@
+<html>
+  <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
+    <link rel="stylesheet" href="static/bootstrap-theme.min.css">
+    <script src="/static/bootstrap.min.js"></script>
+    <script src="/static/plotly-latest.min.js"></script>
+  </head>
+
+  <body>
+    <div class='container'>
+      <div class='row'>
+        <div class='col-md-5'>
+		  <h1>Falling Ball PID</h1>
+		  <h2>Initial condition</h2>
+          <form class='form-horizontal' action='/index' method='GET'> 
+            <div class='form-group'>             
+              <div class='col-md-3'>
+				<label for='s_0' class="control-label">S<sub>0</sub></label>
+                <input type='text' class='form-control'  class='form-control' id='s_0' name='s_0' value={{params.s_0}}>
+              </div>			
+			  
+              <div class='col-md-3'>
+				<label for='sp' class="control-label">S<sub>set</sub></label>
+                <input type='text' class='form-control'  id='sp' name='sp' value={{params.sp}}>
+              </div>
+			  
+              <div class='col-md-3'>
+				<label for='v_0' class="control-label">v<sub>0</sub></label>
+                <input type='text' class='form-control'  id='v_0' name='v_0' value={{params.v_0}}>
+              </div>
+			  
+              <div class='col-md-3'>
+				<label for='t_f' class="control-label">t<sub>f</sub></label>
+                <input type='text' class='form-control'  id='t_f' name='t_f' value={{params.t_f}}>
+              </div>
+            </div>
+
+            <div class='form-group'>
+              <h2>PID parameters</h2>
+              <div class='col-md-3'>
+				<label for='k_p' class="control-label">k<sub>p</sub></label>
+                <input type='text' class='form-control'  id='k_p' name='k_p' value={{params.k_p}}>
+              </div>
+			  
+              <div class='col-md-3'>
+				<label for='k_i' class="control-label">k<sub>i</sub></label>
+                <input type='text' class='form-control'  id='k_i' name='k_i' value={{params.k_i}}>
+              </div>
+			  
+              <div class='col-md-3'>
+				<label for='k_d' class="control-label">k<sub>d</sub></label>
+                <input type='text' class='form-control'  id='k_d' name='k_d' value={{params.k_d}}>
+              </div>
+            </div>
+
+            <div class='form-group'>
+              <h2>Time increment</h2>
+              
+              <div class='col-md-3'>
+				<label for='dt' class="control-label">&Delta;t</label>
+                <input type='text' class='form-control'  id='dt' name='dt' value={{params.dt}}>
+              </div>
+            </div>
+
+            <div class='form-group'>
+              <div class='col-md-3'>
+                <input type='submit' class='btn btn-primary' id='submit' value='Refresh'>
+              </div>
+              <div class='col-md-3'>
+				<a href='/' class='btn btn-danger'>Default</a>
+              </div>
+            </div>    
+          </form>
+        </div>
+        <div class='col-md-7'>
+		  <div id="chart"></div>
+		  <center><img src='/static/ball-scheme.png' class='img-responsive'></center>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var trace1 = {
+        x: {{data[0]}},
+        y: {{data[1]}},
+        type: 'scatter'
+      };
+var data = [trace1];
+Plotly.newPlot('chart', data);
+    </script>
+
+  </body>
+</html>
