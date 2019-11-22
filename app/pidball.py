@@ -5,26 +5,29 @@ class PIDBall():
     def __init__(self, input_params):
         params = {'s_0':10, 'sp':5, 'v_0':0, 'dt':0.01, 't_f':1, 'k_p': 1500, 'k_i': 300, 'k_d': 50}
         params.update(input_params)
+        self.params = params
 
-        self.s_0 = params['s_0']
+        self.reset()
+
+    def reset(self):
+        self.s_0 = self.params['s_0']
         self.s_last = self.s_0
-        self.s_sp = params['sp']
+        self.s_sp = self.params['sp']
 
-        self.v_0 = params['v_0']
+        self.v_0 = self.params['v_0']
 
         self.t_0 = 0
-        self.t_f = params['t_f']
-        self.dt = params['dt']
+        self.t_f = self.params['t_f']
+        self.dt = self.params['dt']
 
-        self.k_p = params['k_p']
-        self.k_i = params['k_i']
-        self.k_d = params['k_d']
+        self.k_p = self.params['k_p']
+        self.k_i = self.params['k_i']
+        self.k_d = self.params['k_d']
 
         self.g = -9.8
 
         self.t_array = [self.t_0]
         self.s_array = [self.s_0]
-
         self.integral = 0
 
     def data(self):
@@ -70,6 +73,8 @@ class PIDBall():
         return p+i+d
 
     def run(self):
+        self.reset()
+
         t_0 = self.t_0
         t_f = self.t_f
         dt = self.dt
