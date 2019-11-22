@@ -3,8 +3,12 @@ from app import app
 from .pidball import PIDBall
 
 @app.route('/')
-@app.route('/index', methods=['GET'])
-def index():
+@app.route('/presentation')
+def presentation():
+    return render_template('presentation.html')
+
+@app.route('/pid', methods=['GET'])
+def show_pid():
     params = {
             's_0': float(request.args.get('s_0', '10')),
             'sp': float(request.args.get('sp', '5')),
@@ -18,4 +22,4 @@ def index():
 
     pid = PIDBall(params)
     data = pid.run()
-    return render_template('index.html', data=data, params=params)
+    return render_template('pid.html', data=data, params=params)
